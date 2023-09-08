@@ -1,0 +1,59 @@
+deployAs:
+  - name: service
+    applicationType: service
+    endpoint: /service
+    scripts:
+      postDeploy: npm install && npm run build && npm run connector:post-deploy
+      preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
+    configuration:
+      standardConfiguration:
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
+      securedConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+        - key: CTP_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+        - key: CTP_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce client scope
+        - key: BLOOMREACH_ENGAGEMENT_API_KEY
+          description: Bloomreach API key
+        - key: BLOOMREACH_ENGAGEMENT_API_SECRET
+          description: Bloomreach API secret
+        - key: BLOOMREACH_ENGAGEMENT_PROJECT_TOKEN
+          description: Bloomreach project token
+        - key: BLOOMREACH_ENGAGEMENT_CATALOG_LOCALE
+          description: Bloomreach catalog locale
+        - key: BASIC_AUTH_SECRET
+          description: HTTP basic auth password
+  - name: event
+    applicationType: event
+    endpoint: /event
+    scripts:
+      postDeploy: npm install && npm run build && npm run connector:post-deploy
+      preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
+    configuration:
+      standardConfiguration:
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
+      securedConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+        - key: CTP_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+        - key: CTP_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce client scope
+        - key: BLOOMREACH_ENGAGEMENT_API_KEY
+          description: Bloomreach API key
+        - key: BLOOMREACH_ENGAGEMENT_API_SECRET
+          description: Bloomreach API secret
+        - key: BLOOMREACH_ENGAGEMENT_PROJECT_TOKEN
+          description: Bloomreach project token
+        - key: BLOOMREACH_ENGAGEMENT_CATALOG_LOCALE
+          description: Bloomreach catalog locale
+        - key: BASIC_AUTH_SECRET
+          description: HTTP basic auth password
