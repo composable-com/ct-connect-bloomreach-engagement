@@ -1,15 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { assertError, assertString } from '../utils/assert.utils';
+import { assertError } from '../utils/assert.utils';
 import { setupBloomreachEngagement } from './actions';
 
 const CONNECT_APPLICATION_URL_KEY = 'CONNECT_SERVICE_URL';
 
 async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   const applicationUrl = properties.get(CONNECT_APPLICATION_URL_KEY);
-
-  assertString(applicationUrl, CONNECT_APPLICATION_URL_KEY);
 
   await setupBloomreachEngagement({
     applicationUrl: applicationUrl as string,
