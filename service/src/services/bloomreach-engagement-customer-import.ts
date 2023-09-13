@@ -44,7 +44,7 @@ export async function bloomreachEngagementCustomerImport(params: {
         active: true,
         source: {
           source_type: 'url',
-          import_url: `${params.applicationUrl}/service/customers`,
+          import_url: `${params.applicationUrl}/customers`,
           auth: {
             username: projectKey,
             password: basicAuthSecret,

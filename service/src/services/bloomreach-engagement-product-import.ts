@@ -22,12 +22,12 @@ export async function bloomreachEngagementProductImport(params: {
     products: {
       name: getBloomreachProductImportName(),
       catalog_name: `CT Products (${projectKey})`,
-      import_url: `${params.applicationUrl}/service/products`,
+      import_url: `${params.applicationUrl}/products`,
     },
     variants: {
       name: getBloomreachVariantImportName(),
       catalog_name: `CT Variants (${projectKey})`,
-      import_url: `${params.applicationUrl}/service/variants`,
+      import_url: `${params.applicationUrl}/variants`,
     },
   };
 
