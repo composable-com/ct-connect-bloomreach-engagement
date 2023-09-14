@@ -5,9 +5,8 @@ export async function basicAuthHandler(params: {
   req: Request;
   res: Response;
   handler: () => Promise<void>;
-  handleError: (error: Error) => void;
 }) {
-  const { req, res, handler, handleError } = params;
+  const { req, res, handler } = params;
   const { basicAuthSecret, projectKey } = readConfiguration();
   const allowedCredentials = [
     { username: projectKey, password: basicAuthSecret },
@@ -30,7 +29,12 @@ export async function basicAuthHandler(params: {
       try {
         await handler();
       } catch (error) {
-        handleError(error as Error);
+        const err = error as Error;
+        res.contentType('text/html');
+        res.status(500);
+        res.send(
+          `<div>Error: ${err.message}</div> <br /> <pre>${err.stack}</pre>`
+        );
       }
     } else {
       res.setHeader('WWW-Authenticate', 'Basic realm="Restricted Area"');

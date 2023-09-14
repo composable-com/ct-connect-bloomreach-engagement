@@ -17,14 +17,6 @@ export async function getProductsController(req: Request, res: Response) {
       res.contentType('text/csv');
       res.status(200);
       res.send(data);
-    },
-    handleError: (error: Error) => {
-      const err = error as Error;
-      res.contentType('text/html');
-      res.status(500);
-      res.send(
-        `<div>Error: ${err.message}</div> <br /> <pre>${err.stack}</pre>`
-      );
-    },
+    }
   });
 }
