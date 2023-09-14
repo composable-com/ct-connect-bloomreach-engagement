@@ -5,6 +5,7 @@ import {
   getBloomreachProjectToken,
   getBloomreachVariantImportName,
 } from '../utils/bloomreach.utils';
+import { logger } from '../utils/logger.utils';
 
 interface BloomreachEngagementImport {
   import_id: string;
@@ -49,50 +50,53 @@ interface BloomreachEngagementImport {
 }
 
 export async function bloomreachEngagementDeleteImports() {
-  const bloomreachProductImportName = getBloomreachProductImportName();
-  const bloomreachVariantImportName = getBloomreachVariantImportName();
-  const bloomreachCustomerImportName = getBloomreachCustomerImportName();
+  try {
+    const bloomreachProductImportName = getBloomreachProductImportName();
+    const bloomreachVariantImportName = getBloomreachVariantImportName();
+    const bloomreachCustomerImportName = getBloomreachCustomerImportName();
 
-  const importListResponse = await fetch(
-    `https://api-engagement.bloomreach.com/imports/v1/${getBloomreachProjectToken()}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: getBloomreachAuthHeader(),
-      },
-    }
-  );
+    const importListResponse = await fetch(
+      `https://api-engagement.bloomreach.com/imports/v1/${getBloomreachProjectToken()}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getBloomreachAuthHeader(),
+        },
+      }
+    );
 
-  const importList =
-    (await importListResponse.json()) as unknown as BloomreachEngagementImport[];
+    const importList =
+      (await importListResponse.json()) as unknown as BloomreachEngagementImport[];
 
-  const ctConnectImports = importList.filter((importItem) => {
-    const isProductImport =
-      importItem.import_definition.name === bloomreachProductImportName;
-    const isVariantImport =
-      importItem.import_definition.name === bloomreachVariantImportName;
-    const isCustomerImport =
-      importItem.import_definition.name === bloomreachCustomerImportName;
-    return isProductImport || isCustomerImport || isVariantImport;
-  });
+    const ctConnectImports = importList.filter((importItem) => {
+      const isProductImport =
+        importItem.import_definition.name === bloomreachProductImportName;
+      const isVariantImport =
+        importItem.import_definition.name === bloomreachVariantImportName;
+      const isCustomerImport =
+        importItem.import_definition.name === bloomreachCustomerImportName;
+      return isProductImport || isCustomerImport || isVariantImport;
+    });
 
-  await Promise.all(
-    ctConnectImports.map((importItem) => {
-      return fetch(
-        `https://api-engagement.bloomreach.com/imports/v1/${getBloomreachProjectToken()}/${
-          importItem.import_id
-        }`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: getBloomreachAuthHeader(),
-          },
-        }
-      );
-    })
-  );
-
+    await Promise.all(
+      ctConnectImports.map((importItem) => {
+        return fetch(
+          `https://api-engagement.bloomreach.com/imports/v1/${getBloomreachProjectToken()}/${
+            importItem.import_id
+          }`,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: getBloomreachAuthHeader(),
+            },
+          }
+        );
+      })
+    );
+  } catch (error) {
+    logger.info(`Bloomreach Delete Imports Error: ${(error as Error).message}`);
+  }
   return;
 }
