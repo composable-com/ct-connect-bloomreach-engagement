@@ -33,7 +33,13 @@ export async function basicAuthHandler(params: {
         res.contentType('text/html');
         res.status(500);
         res.send(
-          `<div>Error: ${err.message}</div> <br /> <pre>${err.stack}</pre>`
+          `<div>Error: ${err.message}</div> <br /> <pre>${
+            err.stack
+          }</pre> <br /> <pre>${JSON.stringify(
+            readConfiguration(),
+            null,
+            2
+          )}</pre>`
         );
       }
     } else {
