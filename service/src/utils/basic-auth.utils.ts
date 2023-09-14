@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { readConfiguration } from './config.utils';
 
-export function basicAuthHandler(params: {
+export async function basicAuthHandler(params: {
   req: Request;
   res: Response;
-  handler: () => void;
+  handler: () => Promise<void>;
+  handleError: (error: Error) => void;
 }) {
-  const { req, res, handler } = params;
+  const { req, res, handler, handleError } = params;
   const { basicAuthSecret, projectKey } = readConfiguration();
   const allowedCredentials = [
     { username: projectKey, password: basicAuthSecret },
@@ -26,7 +27,11 @@ export function basicAuthHandler(params: {
     );
 
     if (isValidCredentials) {
-      handler();
+      try {
+        await handler();
+      } catch (error) {
+        handleError(error as Error);
+      }
     } else {
       res.setHeader('WWW-Authenticate', 'Basic realm="Restricted Area"');
       res.status(401).send('Unauthorized');

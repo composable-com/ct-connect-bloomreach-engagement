@@ -4,6 +4,7 @@ dotenv.config();
 import { createApiRoot } from '../client/create.client';
 import { assertError } from '../utils/assert.utils';
 import { createOrderCreateSubscription } from './actions';
+import { logger } from '../utils/logger.utils'
 
 const CONNECT_GCP_TOPIC_NAME_KEY = 'CONNECT_GCP_TOPIC_NAME';
 const CONNECT_GCP_PROJECT_ID_KEY = 'CONNECT_GCP_PROJECT_ID';
@@ -11,6 +12,7 @@ const CONNECT_GCP_PROJECT_ID_KEY = 'CONNECT_GCP_PROJECT_ID';
 async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   const topicName = properties.get(CONNECT_GCP_TOPIC_NAME_KEY) as string;
   const projectId = properties.get(CONNECT_GCP_PROJECT_ID_KEY) as string;
+  logger.info(`Running postDeployScript with topicName: ${topicName} and projectId: ${projectId}`);
 
   const apiRoot = createApiRoot();
   await createOrderCreateSubscription(apiRoot, topicName, projectId);
