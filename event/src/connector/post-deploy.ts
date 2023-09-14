@@ -12,7 +12,6 @@ const CONNECT_GCP_PROJECT_ID_KEY = 'CONNECT_GCP_PROJECT_ID';
 async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   const topicName = properties.get(CONNECT_GCP_TOPIC_NAME_KEY) as string;
   const projectId = properties.get(CONNECT_GCP_PROJECT_ID_KEY) as string;
-  logger.info(`Running postDeployScript with topicName: ${topicName} and projectId: ${projectId}`);
 
   const apiRoot = createApiRoot();
   await createOrderCreateSubscription(apiRoot, topicName, projectId);

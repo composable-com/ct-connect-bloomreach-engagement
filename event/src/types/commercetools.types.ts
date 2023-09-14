@@ -3,25 +3,17 @@ import { Order } from '@commercetools/platform-sdk/dist/declarations/src/generat
 import { MessageDeliveryPayload } from '@commercetools/platform-sdk/dist/declarations/src/generated/models/subscription';
 
 export interface CtEvent {
-  id: string;
-  source: string;
-  specversion: string;
-  type: string;
-  time: string;
-  data: {
-    message: {
-      attributes: {
-        'content-type': string;
-      };
-      data: string;
-      messageId: string;
-      message_id: string;
-      publishTime: string;
-      publish_time: string;
+  message: {
+    attributes: {
+      'content-type': string;
     };
-    subscription: string;
+    data: string;
+    messageId: string;
+    message_id: string;
+    publishTime: string;
+    publish_time: string;
   };
-  traceparent: string;
+  subscription: string;
 }
 
 export interface CtEventData<Payload> {
