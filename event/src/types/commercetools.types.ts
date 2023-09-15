@@ -16,19 +16,6 @@ export interface CtEvent {
   subscription: string;
 }
 
-export interface CtEventData<Payload> {
-  id: string;
-  source: string;
-  specversion: string;
-  type: string;
-  subject: string;
-  time: string;
-  dataref: string;
-  sequence: string;
-  sequencetype: string;
-  data: Payload;
-}
-
 export interface CtOrderCreatedPayload extends MessageDeliveryPayload {
   notificationType: 'Message';
   projectKey: string;
@@ -41,7 +28,7 @@ export interface CtOrderCreatedPayload extends MessageDeliveryPayload {
   };
   resourceVersion: 1;
   type: 'OrderCreated';
-  order: Order;
+  order?: Order;
   createdAt: string;
   lastModifiedAt: string;
   createdBy: CreatedBy;

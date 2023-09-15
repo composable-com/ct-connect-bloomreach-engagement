@@ -2,11 +2,7 @@ import { Request, Response } from 'express';
 import { bloomreachEngagementEvent } from '../services/bloomreach-engagement-event';
 import { logger } from '../utils/logger.utils';
 import { readConfiguration } from '../utils/config.utils';
-import {
-  CtEvent,
-  CtEventData,
-  CtOrderCreatedPayload,
-} from '../types/commercetools.types';
+import { CtEvent, CtOrderCreatedPayload } from '../types/commercetools.types';
 
 /**
  * Exposed event POST endpoint.
@@ -21,13 +17,12 @@ export async function post(request: Request, response: Response) {
   const { projectKey } = readConfiguration();
   try {
     const body: CtEvent = request.body;
-    logger.info(`Event message: ${JSON.stringify(body)}`);
-    const payload: CtEventData<CtOrderCreatedPayload> = JSON.parse(
+    const payload: CtOrderCreatedPayload = JSON.parse(
       Buffer.from(body.message.data, 'base64').toString()
     );
-    const order = payload.data.order;
+    const order = payload.order;
 
-    if (payload.data.type === 'OrderCreated' && order.customerEmail) {
+    if (payload.type === 'OrderCreated' && order?.customerEmail) {
       logger.info('Processing OrderCreated');
       await bloomreachEngagementEvent({
         customerIds: order.customerEmail,

@@ -40,7 +40,7 @@ curl --location 'https://connect.us-central1.gcp.commercetools.com/composable-pr
         },
         {
           "key": "CTP_SCOPE",
-          "value": "composable-product-dev-sandbox manage_api_clients:composable-product-dev-sandbox view_audit_log:composable-product-dev-sandbox"
+          "value": "manage_project:composable-product-dev-sandbox manage_api_clients:composable-product-dev-sandbox view_audit_log:composable-product-dev-sandbox"
         },
         {
           "key": "BLOOMREACH_ENGAGEMENT_API_KEY",
