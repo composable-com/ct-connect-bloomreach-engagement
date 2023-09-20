@@ -103,7 +103,7 @@ describe('post', () => {
     });
   });
 
-  xit('should handle error gracefully', async () => {
+  it('should handle error gracefully', async () => {
     // Mock the request body with an invalid event
     mockRequest.body = {
       message: {
