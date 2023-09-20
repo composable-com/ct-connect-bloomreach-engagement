@@ -89,7 +89,7 @@ export async function bloomreachEngagementCustomerImport(params: {
     import_id: string;
   };
 
-  logger.info(`'Engagement Customer Import Success:  ${JSON.stringify(data)}`);
+  logger.info(`Engagement Customer Import Success: ${JSON.stringify(data)}`);
 
   return data;
 }

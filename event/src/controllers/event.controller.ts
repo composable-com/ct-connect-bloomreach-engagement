@@ -52,6 +52,7 @@ export async function post(request: Request, response: Response) {
     response.status(200);
     response.send();
   } catch (error) {
+    console.log(error)
     logger.info(`Event message error: ${(error as Error).message}`);
     response.status(400);
     response.send();

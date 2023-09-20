@@ -8,7 +8,7 @@ async function preUndeploy(): Promise<void> {
   await bloomreachEngagementDeleteImports();
 }
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     await preUndeploy();
   } catch (error) {
