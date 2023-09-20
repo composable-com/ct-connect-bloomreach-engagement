@@ -135,7 +135,7 @@ export async function bloomreachEngagementProductImport(params: {
     import_id: string;
   };
 
-  logger.info(`'Engagement Product Import Success:  ${JSON.stringify(data)}`);
+  logger.info(`Engagement Product Import Success: ${JSON.stringify(data)}`);
 
   return data;
 }

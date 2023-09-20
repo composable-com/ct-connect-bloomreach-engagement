@@ -10,12 +10,12 @@ async function preUndeploy(): Promise<void> {
   await deleteOrderCreateSubscription(apiRoot);
 }
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     await preUndeploy();
   } catch (error) {
     assertError(error);
-    process.stderr.write(`Post-undeploy failed: ${error.message}\n`);
+    process.stderr.write(`Pre-undeploy failed: ${error.message}`);
     process.exitCode = 1;
   }
 }
