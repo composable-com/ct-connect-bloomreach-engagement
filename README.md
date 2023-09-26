@@ -1,6 +1,11 @@
-# commercetools Bloomreach connector
+# Bloomreach Engagement commercetools connector
 
 <img height="110" src="https://github.com/oriuminc/ct-connect-bloomreach/blob/main/_logos.svg" />
+
+The Bloomreach Engagement commercetools connector was created by [Orium](https://orium.com/), and provides the following features:
+- Ability to initially load all products and customers from commercetools to Bloomreach Engagement when the connector is installed
+- Ability to automatically synchronize all products and customers from commercetools to Bloomreach Engagement through a scheduled task
+- Ability to capture customer order events from commercetools to Bloomreach Engagement
 
 ## Overview
 
