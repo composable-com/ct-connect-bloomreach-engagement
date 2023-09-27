@@ -1,0 +1,49 @@
+name: Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
+env:
+  CI: true
+
+jobs:
+  tests:
+    name: Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: App "event" - Install dependencies
+        working-directory: ./event
+        run: yarn install --frozen-lockfile
+
+      - name: App "event" - TypeScript
+        working-directory: ./event
+        run: yarn tsc --noEmit --incremental
+
+      - name: App "event" - Tests
+        working-directory: ./event
+        run: yarn test
+
+      - name: App "service" - Install dependencies
+        working-directory: ./service
+        run: yarn install --frozen-lockfile
+
+      - name: App "service" - TypeScript
+        working-directory: ./service
+        run: yarn tsc --noEmit --incremental
+
+      - name: App "service" - Tests
+        working-directory: ./service
+        run: yarn test

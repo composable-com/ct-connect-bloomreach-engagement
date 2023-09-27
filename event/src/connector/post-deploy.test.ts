@@ -6,6 +6,16 @@ jest.mock('../utils/assert.utils', () => ({
   assertError: jest.fn(),
 }));
 
+jest.mock('../utils/config.utils', () => ({
+  readConfiguration: jest.fn().mockReturnValue({
+    region: 'test-region',
+    projectKey: 'test-project',
+    clientId: 'test-client-id',
+    clientSecret: 'test-client-secret',
+    scope: 'test-scope',
+  }),
+}));
+
 jest
   .spyOn(actions, 'createOrderCreateSubscription')
   .mockReturnValue(Promise.resolve());
