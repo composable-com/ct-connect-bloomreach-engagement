@@ -3,6 +3,7 @@
 <img height="110" src="https://github.com/oriuminc/ct-connect-bloomreach/blob/main/_logos.svg" />
 
 The Bloomreach Engagement commercetools connector was created by [Orium](https://orium.com/), and provides the following features:
+
 - Ability to initially load all products and customers from commercetools to Bloomreach Engagement when the connector is installed
 - Ability to automatically synchronize all products and customers from commercetools to Bloomreach Engagement through a scheduled task
 - Ability to capture customer order events from commercetools to Bloomreach Engagement
@@ -50,6 +51,10 @@ On the other hand, the connector will create a subscription to listen to “[Ord
 In order to uninstall the connector, you’ll need to [send the appropriate HTTP request and delete it](https://docs.commercetools.com/connect/deployments#delete-deployment).
 
 This will trigger the [`preUndeploy` script](https://docs.commercetools.com/connect/convert-existing-integration#preundeploy) which will delete the Import cron jobs and messages subscriptions described on the “Installing the connector” section.
+
+## Caveats
+
+The connector is designed to deliver single CSV files will result in extended HTTP request times, potentially exceeding predefined limits. We anticipate that it will handle a modest number of customers and products, likely no more than a few thousand, with an upper limit of approximately 10,000 records. The exact capacity may fluctuate due to various variables. Feel free to get in touch with us if this is a limitation for your project.
 
 ## FAQ
 
